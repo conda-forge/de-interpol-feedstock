@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/de-interpol-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/de-interpol-{{ version }}.tar.gz
   sha256: 0fcaa606fe37ffe9f48b79515312c50e8fe8aebe69076d83c3cd17b6158e1871
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - poetry
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - python-dateutil
     - urllib3 >=1.25.3
 
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/bundesAPI/interpol-api
